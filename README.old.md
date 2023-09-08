@@ -1,1 +1,0 @@
-# DeepTrust Browser Extension
