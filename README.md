@@ -1,2 +1,1 @@
-# deeptrust-ext
-DeepTrust Browser Extension
+# DeepTrust Browser Extension
