@@ -1,13 +1,39 @@
+import { useState } from "react";
+
+function checkRegex(input) {
+  let regex = /https:\/\/twitter\.com\/[A-Za-z0-9]+\/status\/[A-Za-z0-9]+/i;
+  return regex.test(input);
+}
+
 const LinkSubmit = () => {
+  const [url, setURL] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  const handleTextInput = (e) => {
+    const newURL = e.target.value;
+    setURL(newURL);
+    if (checkRegex(newURL)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
+
   return (
-    <div class="input-group mb-3">
+    <div className="input-group mb-3">
       <input
         type="text"
-        class="form-control"
+        className="form-control"
         placeholder="Tweet URL"
         aria-label="tweet url"
+        onInput={handleTextInput}
       />
-      <button class="btn btn-outline-secondary" type="button" id="submit">
+      <button
+        disabled={disabled}
+        className={`btn ${disabled ? "btn-outline-secondary" : "btn-primary"}`}
+        type="button"
+        id="submit"
+      >
         Submit
       </button>
     </div>
