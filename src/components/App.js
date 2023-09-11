@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import "./../styles/App.css";
 import LinkSubmit from "./LinkSubmit";
+import CurrentTweet from "./CurrentTweet";
 import { getJobs } from "../utils/localStorage";
 
 function App() {
@@ -15,12 +16,7 @@ function App() {
       <div className="container py-4 px-3 mx-auto">
         <h1>DeepTrust</h1>
         <h2 className="mb-3">Twitter Buddy</h2>
-        <LinkSubmit {...props} />
-        {jobIds.map((id) => {
-          const job = jobs[id];
-          console.log(job);
-          return <div>{job.id}</div>;
-        })}
+        <CurrentTweet />
       </div>
     </div>
   );
