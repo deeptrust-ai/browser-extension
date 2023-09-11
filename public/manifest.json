@@ -1,6 +1,7 @@
 {
     "manifest_version": 3,
     "name": "DeepTrust",
+    "author": "aman@deeptrust.gg",
     "description": "Deepfake Speech Detection browser extension.",  
     "version": "0.0.1",    
     "action": {
@@ -13,7 +14,18 @@
         "128": "icons/icon128.png"
       }
     },
-    "author": "aman@deeptrust.gg",
+    "content_scripts": [
+      {
+        "matches": [
+          "<all_urls>"
+        ],
+        "js": ["scripts/content.js"]
+      }
+    ],
+    "background": {
+      "service_worker": "scripts/serviceWorker.js",
+      "type": "module"
+    },
     "icons": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
@@ -22,7 +34,6 @@
     },
     "permissions": [
       "storage",
-      "tabs",
-      "activeTabs"
+      "tabs"
     ]
 }
