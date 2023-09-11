@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <div className="container py-4 px-3 mx-auto">
         <h1>DeepTrust</h1>
-        <h2>Twitter Speech Analysis</h2>
+        <h2 className="mb-3">Twitter Buddy</h2>
         <LinkSubmit />
       </div>
     </div>
