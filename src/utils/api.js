@@ -3,12 +3,7 @@ const modalDev =
   "https://amanmibra--rn-demo-api-modal-serve-dev.modal.run/api/";
 const modalProd = "https://amanmibra--rn-demo-api-modal-serve.modal.run/api/";
 
-const URL_PREFIX =
-  process.env.NODE_ENV == "development"
-    ? process.env.MODAL_DEV
-      ? modalDev
-      : localDev
-    : modalProd;
+const URL_PREFIX = modalProd;
 
 const launchJob = async (tweetURL) => {
   if (tweetURL == null) {
@@ -21,7 +16,7 @@ const launchJob = async (tweetURL) => {
 };
 
 const pollJob = async (id) => {
-  const url = apiURLPrefix + `job/${id}`;
+  const url = URL_PREFIX + `job/${id}`;
 
   const res = await fetch(url);
 
