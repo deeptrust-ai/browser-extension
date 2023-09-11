@@ -7,24 +7,39 @@ function checkRegex(input) {
   return regex.test(input);
 }
 
-const CurrentTweet = ({ currentURL }) => {
-  const [url, setURL] = useState("");
-  const [disabled, setDisabled] = useState(false);
+const CurrentTweet = () => {
+  const [url, setURL] = useState();
+  const [disabled, setDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [jobID, setJobID] = useState();
+
+  useEffect(() => {
+    const checkURL = async () => {
+      let queryOptions = { active: true };
+      // `tab` will either be a `tabs.Tab` instance or `undefined`.
+      let [tab] = await chrome.tabs.query(queryOptions);
+      const { url } = tab;
+      if (checkRegex(url)) {
+        setURL(url);
+        setDisabled(false);
+      } else {
+        setURL(null);
+        setDisabled(true);
+      }
+    };
+    checkURL();
+  }, []);
 
   const handleClick = async () => {
-    let queryOptions = { active: true };
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
-    let [tab] = await chrome.tabs.query(queryOptions);
-    console.log("tab", tab.url);
-    /**
-     * 1. Add URL to api
-     * 2. Add loading
-     * 3. Send them to link
-     */
+    setLoading(true);
+    const data = await launchJob(url);
+    console.log("job id: ", data.id);
+    setLoading(false);
+    setJobID(data.id);
   };
 
   return (
-    <div className="mb-3">
+    <div className="d-flex flex-column mb-3 justify-content-center align-items-center row-gap-3">
       <button
         disabled={disabled}
         className={`btn ${disabled ? "btn-outline-secondary" : "btn-primary"}`}
@@ -34,6 +49,26 @@ const CurrentTweet = ({ currentURL }) => {
       >
         Launch Job 🚀
       </button>
+      {loading && (
+        <div class="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      )}
+      {jobID && (
+        <div>
+          <p>Job is ready at:</p>
+          <button
+            disabled={disabled}
+            className={`btn btn-outline-primary`}
+            type="button"
+            onClick={() =>
+              chrome.tabs.create({ url: `https://deeptrust.gg/jobs/${jobID}` })
+            }
+          >
+            ䷼ DeepTrust
+          </button>
+        </div>
+      )}
     </div>
   );
 };
