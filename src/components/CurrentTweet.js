@@ -42,7 +42,9 @@ const CurrentTweet = () => {
     <div className="d-flex flex-column mb-3 justify-content-center align-items-center row-gap-3">
       <button
         disabled={disabled}
-        className={`btn ${disabled ? "btn-outline-secondary" : "btn-primary"}`}
+        className={`btn ${
+          disabled ? "btn-outline-light border-danger" : "btn-success"
+        }`}
         type="button"
         id="launch"
         onClick={handleClick}
@@ -59,7 +61,7 @@ const CurrentTweet = () => {
           <p>Job is ready at:</p>
           <button
             disabled={disabled}
-            className={`btn btn-outline-primary`}
+            className={`btn btn-primary`}
             type="button"
             onClick={() =>
               chrome.tabs.create({ url: `https://deeptrust.gg/job/${jobID}` })
