@@ -62,7 +62,7 @@ const CurrentTweet = () => {
             className={`btn btn-outline-primary`}
             type="button"
             onClick={() =>
-              chrome.tabs.create({ url: `https://deeptrust.gg/jobs/${jobID}` })
+              chrome.tabs.create({ url: `https://deeptrust.gg/job/${jobID}` })
             }
           >
             ䷼ DeepTrust
