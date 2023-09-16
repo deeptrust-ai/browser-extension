@@ -3,7 +3,7 @@ import { sendMessage } from "../utils/message";
 import { launchJob, pollJob } from "../utils/api";
 import { setJob } from "../utils/localStorage";
 function checkRegex(input) {
-  let regex = /https:\/\/twitter\.com\/[A-Za-z0-9]+\/status\/[A-Za-z0-9]+/i;
+  let regex = /https:\/\/twitter\.com\/[A-Za-z0-9]+_\/status\/[A-Za-z0-9]+/i;
   return regex.test(input);
 }
 
